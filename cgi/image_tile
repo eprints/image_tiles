@@ -28,7 +28,12 @@ $ds->search( filters => [
 my @docs = $eprint->get_all_documents();
 for my $i ( 0 .. $#docs ) {
     last if ( $i >= $limit );
-    $frag->appendChild( $docs[$i]->render_citation_link( "render_image_tile" ) );
+
+    my %fragments = ();
+    ( $fragments{title}, $fragments{link} ) = split( "@", $docs[$i]->get_value( 'formatdesc' ) );
+
+    foreach my $key ( keys %fragments ) { $fragments{$key} = [ $session->make_text( $fragments{$key} ), "XHTML" ]; }
+    $frag->appendChild( $docs[$i]->render_citation( "render_image_tile", %fragments ) );
 }
 
 # TODO: Caching

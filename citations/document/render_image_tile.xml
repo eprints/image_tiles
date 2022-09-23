@@ -2,15 +2,13 @@
 <cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:cite="http://eprints.org/ep3/citation" xmlns:epc="http://eprints.org/ep3/control">
 
     <div class="tile">
-      <a href="/{$item.property('formatdesc')}">
+      <a href="/{$link}">
         <img src="{$item.thumbnail_url('lightbox')}" />
         <div class="tile-color-overlay">
         </div>
         <div class="tile-info">
           <div class="tile-title">
-            <epc:if test="is_set($item.property('title'))">
-              <epc:print expr="$item.property('title')"/>
-            </epc:if>
+            <epc:print expr="$title"/>
           </div>
 	  <div class="tile-link">
             <epc:phrase ref="image_tile:tile_link_description" />
