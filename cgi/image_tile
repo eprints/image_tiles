@@ -1,0 +1,28 @@
+use EPrints;
+
+use strict;
+
+my $session = new EPrints::Session;
+exit( 0 ) unless( defined $session );
+
+my $ds = $session->dataset( "archive" );
+
+my $eprint_id = $session->param( "eprint_id" );
+exit if !( $eprint_id =~ /^\d+$/ ); # Reject non-natural numbers and zero
+
+# Only return from archive dataset, no private data revealed
+my $eprint; 
+$ds->search( filters => [
+        { meta_fields => [qw( eprintid )], value => $eprint_id },
+    ], )->map(sub 
+    {
+        my( undef, undef, $item ) = @_;
+        $item->value( "eprintid" ) == $eprint_id ? $eprint = $item : exit;
+    });
+
+# TODO: Caching
+my $citation = $eprint->render_citation_link( "render_image_tile" );
+
+print EPrints::XML::to_string( $citation );
+
+$session->terminate;

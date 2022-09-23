@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:cite="http://eprints.org/ep3/citation" xmlns:epc="http://eprints.org/ep3/control">
+
+<epc:set name='docs' expr='$item.documents()'>
+  <epc:foreach expr="$docs" iterator="doc">
+    <div class="tile">
+      <a href="/{$doc.property('formatdesc')}">
+        <img src="{$doc.thumbnail_url('lightbox')}" />
+        <div class="tile-color-overlay">
+        </div>
+        <div class="tile-info">
+          <div class="tile-title">
+            <epc:if test="is_set($doc.property('title'))">
+              <epc:print expr="$doc.property('title')"/>
+            </epc:if>
+          </div>
+	  <div class="tile-link">
+            <epc:phrase ref="image_tile:tile_link_description" />
+            <svg width="30" height="14" viewBox="0 0 30 14" xmlns="http://www.w3.org/2000/svg">
+              <path d="M23.414 14c-.2 0-.35-.048-.45-.145-.299-.29-.299-.58 0-.87l5.015-5.368H.6c-.4 0-.599-.194-.599-.58 0-.388.2-.581.599-.581h27.38l-5.014-5.368c-.3-.29-.3-.58 0-.87.3-.29.599-.29.898 0L29.85 6.6c.1.097.15.242.15.435 0 .194-.05.339-.15.436-.05.048-2.045 2.176-5.987 6.383-.1.097-.25.145-.45.145z" fill-rule="nonzero"></path>
+            </svg>
+          </div>
+        </div>
+      </a>
+    </div>
+  </epc:foreach>
+</epc:set>
+
+</cite:citation>
