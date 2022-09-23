@@ -7,7 +7,12 @@ exit( 0 ) unless( defined $session );
 
 my $ds = $session->dataset( "archive" );
 
+my $frag = $session->make_doc_fragment;
+
 my $eprint_id = $session->param( "eprint_id" );
+exit if !( $eprint_id =~ /^\d+$/ ); # Reject non-natural numbers and zero
+
+my $limit = defined $session->param( "limit" ) ? $session->param( "limit" ) : 16; 
 exit if !( $eprint_id =~ /^\d+$/ ); # Reject non-natural numbers and zero
 
 # Only return from archive dataset, no private data revealed
@@ -20,9 +25,15 @@ $ds->search( filters => [
         $item->value( "eprintid" ) == $eprint_id ? $eprint = $item : exit;
     });
 
-# TODO: Caching
-my $citation = $eprint->render_citation_link( "render_image_tile" );
+my @docs = $eprint->get_all_documents();
+for my $i ( 0 .. $#docs ) {
+    last if ( $i >= $limit );
+    $frag->appendChild( $docs[$i]->render_citation_link( "render_image_tile" ) );
+}
 
-print EPrints::XML::to_string( $citation );
+# TODO: Caching
+#my $citation = $eprint->render_citation_link( "render_image_tile" );
+
+print EPrints::XML::to_string( $frag );
 
 $session->terminate;

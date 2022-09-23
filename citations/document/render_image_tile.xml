@@ -1,17 +1,15 @@
 <?xml version="1.0" ?>
 <cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:cite="http://eprints.org/ep3/citation" xmlns:epc="http://eprints.org/ep3/control">
 
-<epc:set name='docs' expr='$item.documents()'>
-  <epc:foreach expr="$docs" iterator="doc" limit='16'>
     <div class="tile">
-      <a href="/{$doc.property('formatdesc')}">
-        <img src="{$doc.thumbnail_url('lightbox')}" />
+      <a href="/{$item.property('formatdesc')}">
+        <img src="{$item.thumbnail_url('lightbox')}" />
         <div class="tile-color-overlay">
         </div>
         <div class="tile-info">
           <div class="tile-title">
-            <epc:if test="is_set($doc.property('title'))">
-              <epc:print expr="$doc.property('title')"/>
+            <epc:if test="is_set($item.property('title'))">
+              <epc:print expr="$item.property('title')"/>
             </epc:if>
           </div>
 	  <div class="tile-link">
@@ -23,7 +21,5 @@
         </div>
       </a>
     </div>
-  </epc:foreach>
-</epc:set>
 
 </cite:citation>

@@ -5,7 +5,7 @@
 ```XML
   <div id="image-tile"></div>
   <script type="text/javascript">
-    new Ajax.Updater('image-tile',"/cgi/image_tile", { parameters:"eprint_id=XXXX"});
+    new Ajax.Updater('image-tile',"/cgi/image_tile", {parameters:"eprint_id=XXXX"});
   </script>
 ```  
 
@@ -15,3 +15,6 @@
 
 Authors:
 - Edward Oakley, EPrints Services
+
+EPrints 3.4 is supplied by EPrints Services.
+The files contained within this directory are all Copyright 2022 University of Southampton.
