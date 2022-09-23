@@ -10,3 +10,8 @@
 ```  
 
 - Replace XXXX with the eprintid of the item containing the documents you wish to display
+- The item should have 16 images
+
+
+Authors:
+- Edward Oakley, EPrints Services
