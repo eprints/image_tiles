@@ -118,3 +118,21 @@ div#image-tile {
         grid-row: span 2 !important;
     }
 }
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    filter: hue-rotate(180px);
+  }
+  to {
+    opacity: 1;
+    filter: hue-rotate(0px);
+  }
+}
+
+.tile {
+  animation: cardEntrance 2500ms ease-out;
+  animation-fill-mode: backwards;
+  --stagger-delay: 1000ms;
+  animation-delay: calc(2 * var(--stagger-delay));
+}
