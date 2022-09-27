@@ -2,7 +2,7 @@
 
 
 ## Basic Config - Tile curation mode 
-This configuration allows you to curate the images shown in the tiles, you will need to create an item which contains images and then provide each document with a title and link to the images where they originate. Instructions below.  
+This configuration allows you to curate the images shown in the tiles, you will need to create an item which contains images and then provide each document with a title and link. Instructions below.  
 
 
 1. Make sure you have added this ingredient to the flavour/FLAVOUR_DIR/inc file as `ingredients/image_tiles`.
@@ -11,7 +11,7 @@ This configuration allows you to curate the images shown in the tiles, you will 
 4. For each item add the title and the tile link split by an `@` symbol into the format description field. Like this... `Tile Title@5128` if going to an eprint OR Like this... `Tile Title@https://external.site.com/page.html`.  
 5. Make the item live by depositing.
 6. Replace XXXX in the xpage code (eprint_id parameter) with the eprintid of the item containing the documents you wish to display. The following are all optionally configurable extras. If you wish to see the result, (when appropriate) reload apache.
-7. Optionally you can set a new limit if the amount of images is different. See example sippet below with an added argument. So show a random selection of images from a larger pool intentionally set the limit lower than the number of documents added.
+7. Optionally you can set a new limit if the amount of images is different. See example sippet below with an added argument. To show a random selection of images from a larger pool intentionally set the limit lower than the number of documents added.
 8. If you wish to make the documents display in a random order, add the random parameter equal to 1. Seen in the 3rd XML snippet. 
 
 ```XML
