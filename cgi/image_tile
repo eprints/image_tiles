@@ -1,5 +1,6 @@
 use EPrints;
 
+use List::Util qw(shuffle);
 use strict;
 
 my $session = new EPrints::Session;
@@ -13,7 +14,10 @@ my $eprint_id = $session->param( "eprint_id" );
 exit if !( $eprint_id =~ /^\d+$/ ); # Reject non-natural numbers and zero
 
 my $limit = defined $session->param( "limit" ) ? $session->param( "limit" ) : 16; 
-exit if !( $eprint_id =~ /^\d+$/ ); # Reject non-natural numbers and zero
+exit if !( $limit =~ /^\d+$/ ); # Also reject non-natural numbers and zero
+
+my $random = defined $session->param( "random" ) ? $session->param( "random" ) : 0;
+exit if !( $random =~ /^[0-1]$/ ); # Reject anything other than zero or 1
 
 # Only return from archive dataset, no private data revealed
 my $eprint; 
@@ -26,11 +30,13 @@ $ds->search( filters => [
     });
 
 my @docs = $eprint->get_all_documents();
+@docs = shuffle( @docs ) if $random;
 for my $i ( 0 .. $#docs ) {
     last if ( $i >= $limit );
 
     my %fragments = ();
     ( $fragments{title}, $fragments{link} ) = split( "@", $docs[$i]->get_value( 'formatdesc' ) );
+
 
     foreach my $key ( keys %fragments ) { $fragments{$key} = [ $session->make_text( $fragments{$key} ), "XHTML" ]; }
     $frag->appendChild( $docs[$i]->render_citation( "render_image_tile", %fragments ) );
