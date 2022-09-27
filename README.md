@@ -23,8 +23,18 @@
 - The documents title and related eprint id should go in the formatdesc / description field separated by an @  
 `Test title@7` for example.   
 
+
+## TODO  
+- Randomly populate the squares from the documents within the eprint   
+- Utilize caching of citations   
+- Non curated mode, where applicable documents are pulled from a recent selection of eprints  
+
+
+
 Authors:
 - Edward Oakley, EPrints Services
+
+Developed as part of [UCA Research Online](https://research.uca.ac.uk/) rebrand (2022)  
 
 EPrints 3.4 is supplied by EPrints Services.  
 The files contained within this directory are all Copyright 2022 University of Southampton.  
