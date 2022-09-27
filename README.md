@@ -44,7 +44,7 @@ This configuration allows you to curate the images shown in the tiles, you will 
 
 | parameter | argument | outcome |
 | ----------- | ----------- | ----------- |
-| eprint_id | eprint id | i.e. linking to your.repo.ac.uk/234 |
+| eprint_id | natural numeric | i.e. linking to your.repo.ac.uk/234 |
 | limit | natural numeric | sets the limit for the number of |
 | random | 0 or 1 | from the images attached to the item display them in a random order |
 

@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       // Mouse enters the tile
       item.addEventListener('mouseenter', () => {
-        console.log("Mouse enter", item.querySelector('img'))
         item.querySelector('img').classList.add('tile-hover-img');
         item.classList.add('tile-hover-color');
         item.querySelector('svg').classList.add('arrow-move');
@@ -48,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Mouse leaves the tile
     tiles.forEach((item, i) => {
       item.addEventListener('mouseleave', () => {
-        console.log("Mouse exit", item)
         item.querySelector('img').classList.remove('tile-hover-img');
         item.classList.remove('tile-hover-color');
         item.querySelector('svg').classList.remove('arrow-move');
