@@ -63,6 +63,7 @@ This configuration allows you to curate the images shown in the tiles, you will 
 
 ### Authors:
 - Edward Oakley, EPrints Services
+- Justin Bradley, EPrints Services
 
 Developed as part of [UCA Research Online](https://research.uca.ac.uk/) rebrand (2022). Example seen on their homepage. 
 
