@@ -35,9 +35,15 @@ This configuration allows you to curate the images shown in the tiles, you will 
 </script>
 ```
 
-
 ## Non-curated mode 
-... not yet developed.  
+
+```XML
+<style> .tile { --stagger-delay: 0ms; } </style>
+<div id="image-tile"></div>
+<script type="text/javascript">
+  new Ajax.Updater('image-tile',"/cgi/image_tile.all", {parameters:"limit=16&amp;random=1"});
+</script>
+```
 
 
 ## Parameters
