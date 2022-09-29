@@ -1,0 +1,63 @@
+use EPrints;
+
+use List::Util qw(shuffle);
+use strict;
+
+my $session = new EPrints::Session;
+exit( 0 ) unless( defined $session );
+
+my $ds = $session->dataset( "document" );
+
+my $frag = $session->make_doc_fragment;
+
+my $limit = defined $session->param( "limit" ) ? $session->param( "limit" ) : 16; 
+exit if !( $limit =~ /^\d+$/ ); # Also reject non-natural numbers and zero
+
+my $random = defined $session->param( "random" ) ? $session->param( "random" ) : 0;
+exit if !( $random =~ /^[0-1]$/ ); # Reject anything other than zero or 1
+
+my $searchexp = new EPrints::Search( session => $session, dataset => $ds, custom_order => "-docid", limit => 100 );
+$searchexp->add_field( $ds->get_field( "security" ), "public" );
+$searchexp->add_field( $ds->get_field( "format" ), "image" );
+
+my $list = $searchexp->perform_search;
+
+my @docs;
+$list->map( sub
+{
+  my( $session, $dataset, $doc ) = @_;
+
+  my $eprint = $doc->get_eprint;
+  next unless $eprint && $eprint->get_value( "eprint_status" ) eq "archive"; # else can pick up public images from formaly public eprints
+
+  push @docs, $doc;
+});
+
+@docs = shuffle( @docs ) if $random;
+
+for my $i ( 0 .. $#docs )
+{
+  last if ( $i >= $limit );
+
+  my %fragments = ();
+
+  my $eprint = $docs[$i]->get_eprint;
+  my $t = $eprint->get_value( "title" );
+  my $u = $eprint->get_url();
+  if( length($t) > 15 )
+  {
+    ( $t ) = ( $t =~ /(.{15})/ );
+    $t .= "...";
+  }
+  ( $fragments{title}, $fragments{link} ) = ( $t, $u );
+
+  foreach my $key ( keys %fragments ) { $fragments{$key} = [ $session->make_text( $fragments{$key} ), "XHTML" ]; }
+  $frag->appendChild( $docs[$i]->render_citation( "render_image_tile", %fragments ) );
+}
+
+# TODO: Caching
+#my $citation = $eprint->render_citation_link( "render_image_tile" );
+
+print EPrints::XML::to_string( $frag );
+
+$session->terminate;
