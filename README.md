@@ -31,7 +31,7 @@ This configuration allows you to curate the images shown in the tiles, you will 
 ```XML
 <div id="image-tile"></div>
 <script type="text/javascript">
-  new Ajax.Updater('image-tile',"/cgi/image_tile", {parameters:"eprint_id=7&amp;limit=21&amp;random=1"});
+  new Ajax.Updater('image-tile',"/cgi/image_tile", {parameters:"eprint_id=XXXX&amp;limit=21&amp;random=1"});
 </script>
 ```
 
