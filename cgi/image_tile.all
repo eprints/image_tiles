@@ -28,7 +28,8 @@ $list->map( sub
   my( $session, $dataset, $doc ) = @_;
 
   my $eprint = $doc->get_eprint;
-  next unless $eprint && $eprint->get_value( "eprint_status" ) eq "archive"; # else can pick up public images from formaly public eprints
+  my $file = %{$doc->get_value( 'files' )}[0];
+  next unless $eprint && $eprint->get_value( "eprint_status" ) eq "archive" && $file->get_value( 'filesize' ) > 20000; # else can pick up public images from formaly public eprints if the file size is more than 20KB.
 
   push @docs, $doc;
 });
