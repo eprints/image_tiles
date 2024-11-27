@@ -131,8 +131,5 @@ div#image-tile {
 }
 
 .tile {
-  animation: cardEntrance 2500ms ease-out;
-  animation-fill-mode: backwards;
-  --stagger-delay: 1000ms;
-  animation-delay: calc(2 * var(--stagger-delay));
+  animation: cardEntrance 1000ms ease-out;
 }
