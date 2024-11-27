@@ -17,21 +17,21 @@ This configuration allows you to curate the images shown in the tiles, you will 
 ```XML
   <div id="image-tile"></div>
   <script type="text/javascript">
-    new Ajax.Updater('image-tile',"/cgi/image_tile", {parameters:"eprint_id=XXXX"});
+    new Ajax.Updater('image-tile',"/cgi/image_tile", {method:"GET", parameters:"eprint_id=XXXX"});
   </script>
 ```
   
 ```XML
   <div id="image-tile"></div>
   <script type="text/javascript">
-    new Ajax.Updater('image-tile',"/cgi/image_tile", {parameters:"eprint_id=XXXX&amp;limit=X"});
+    new Ajax.Updater('image-tile',"/cgi/image_tile", {method:"GET", parameters:"eprint_id=XXXX&amp;limit=X"});
   </script>
 ```
 
 ```XML
 <div id="image-tile"></div>
 <script type="text/javascript">
-  new Ajax.Updater('image-tile',"/cgi/image_tile", {parameters:"eprint_id=XXXX&amp;limit=21&amp;random=1"});
+  new Ajax.Updater('image-tile',"/cgi/image_tile", {method:"GET", parameters:"eprint_id=XXXX&amp;limit=21&amp;random=1"});
 </script>
 ```
 
@@ -41,7 +41,7 @@ This configuration allows you to curate the images shown in the tiles, you will 
 <style> .tile { --stagger-delay: 0ms; } </style>
 <div id="image-tile"></div>
 <script type="text/javascript">
-  new Ajax.Updater('image-tile',"/cgi/image_tile.all", {parameters:"limit=16&amp;random=1"});
+  new Ajax.Updater('image-tile',"/cgi/image_tile.all", {method:"GET", parameters:"limit=16&amp;random=1"});
 </script>
 ```
 
