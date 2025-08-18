@@ -13,6 +13,8 @@ This configuration allows you to curate the images shown in the tiles, you will 
 6. Replace XXXX in the xpage code (eprint_id parameter) with the eprintid of the item containing the documents you wish to display. The following are all optionally configurable extras. If you wish to see the result, (when appropriate) reload apache.
 7. Optionally you can set a new limit if the amount of images is different. See example sippet below with an added argument. To show a random selection of images from a larger pool intentionally set the limit lower than the number of documents added.
 8. If you wish to make the documents display in a random order, add the random parameter equal to 1. Seen in the 3rd XML snippet. 
+9. To prevent some images being larger, add `image_tile_settings["allow_large"] = false;`
+10. To make all images larger add `image_tile_settings["all_large"] = true;`
 
 ```XML
   <div id="image-tile"></div>

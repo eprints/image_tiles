@@ -6,6 +6,12 @@ let textColours = ['white', 'red', 'white', '#273746', 'blue', 'white', 'white',
 let patterns = [[2, 10, 11, 13], [1, 11, 15, 16], [6, 10, 11, 13], [1, 2, 9, 12]];
 let pattern = patterns[Math.floor(Math.random()*patterns.length)];
 
+// default settings, override in template when adding new Ajax.Updater('image-tile'...
+image_tile_settings = {
+    "allow_large": true,
+    "all_large": false
+}
+
 // cgi script loads after the rest of the DOM so standart DOMContentLoaded event listeners doesn't cut it
 const isElementLoaded = async selector => {
  while ( document.querySelector(selector) === null) {
@@ -29,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
     addEventListener('resize', (event) => { setGridAutoRows() })
     let tiles = document.querySelectorAll('.tile');
     tiles.forEach((item, i) => {
-      if (pattern.includes(i+1)) {
+      if (pattern.includes(i+1)&& image_tile_settings["allow_large"] || image_tile_settings["all_large"]) {
         item.classList.add('large-tile'); // Set the larger tiles
       }
       // Mouse enters the tile

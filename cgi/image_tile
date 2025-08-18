@@ -29,19 +29,29 @@ $ds->search( filters => [
         $item->value( "eprintid" ) == $eprint_id ? $eprint = $item : exit;
     });
 
-my @docs = $eprint->get_all_documents();
-@docs = shuffle( @docs ) if $random;
-for my $i ( 0 .. $#docs ) {
-    last if ( $i >= $limit );
+if($eprint){
 
-    my %fragments = ();
-    ( $fragments{title}, $fragments{link} ) = split( "@", $docs[$i]->get_value( 'formatdesc' ) );
+    my @docs = $eprint->get_all_documents();
+    @docs = shuffle( @docs ) if $random;
+    for my $i ( 0 .. $#docs ) {
+        last if ( $i >= $limit );
 
+        my %fragments = ();
+        
+        ( $fragments{title}, $fragments{link} ) = split( "@", $docs[$i]->get_value( 'formatdesc' ) );
+        if(!$fragments{link}){
+            # if there was no link specified, default to the eprint.
+            $fragments{link}=$eprint_id;
+        }
+        if(!$fragments{title}){
+        #    $fragments{title}= $docs[$i]->value( "main" );
+        }
 
-    foreach my $key ( keys %fragments ) { $fragments{$key} = [ $session->make_text( $fragments{$key} ), "XHTML" ]; }
-    $frag->appendChild( $docs[$i]->render_citation( "render_image_tile", %fragments ) );
+        print STDERR $docs[$i]->get_value( 'formatdesc' ) . "\n";
+        foreach my $key ( keys %fragments ) { $fragments{$key} = [ $session->make_text( $fragments{$key} ), "XHTML" ]; }
+        $frag->appendChild( $docs[$i]->render_citation( "render_image_tile", %fragments ) );
+    }
 }
-
 # TODO: Caching
 #my $citation = $eprint->render_citation_link( "render_image_tile" );
 
