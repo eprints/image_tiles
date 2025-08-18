@@ -9,7 +9,8 @@ let pattern = patterns[Math.floor(Math.random()*patterns.length)];
 // default settings, override in template when adding new Ajax.Updater('image-tile'...
 image_tile_settings = {
     "allow_large": true,
-    "all_large": false
+    "all_large": false,
+    "small_per_row": 4,
 }
 
 // cgi script loads after the rest of the DOM so standart DOMContentLoaded event listeners doesn't cut it
@@ -23,10 +24,11 @@ const isElementLoaded = async selector => {
 function setGridAutoRows() {
   let tileWrapper = document.querySelector("#image-tile");
   if ( window.innerWidth > 700 ) {
-    tileWrapper.style.cssText = "grid-auto-rows: calc("+tileWrapper.offsetWidth+"px/4);";
+    tileWrapper.style.cssText = "grid-auto-rows: calc("+tileWrapper.offsetWidth+"px/"+image_tile_settings["small_per_row"]+"); grid-template-columns: repeat("+image_tile_settings["small_per_row"]+", 1fr);";
   } else {
     tileWrapper.style.cssText = "grid-auto-rows: calc("+tileWrapper.offsetWidth+"px/2);";
   }
+  console.log(tileWrapper.style.cssText)
 }
 
 document.addEventListener("DOMContentLoaded", function() {

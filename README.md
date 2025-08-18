@@ -15,6 +15,7 @@ This configuration allows you to curate the images shown in the tiles, you will 
 8. If you wish to make the documents display in a random order, add the random parameter equal to 1. Seen in the 3rd XML snippet. 
 9. To prevent some images being larger, add `image_tile_settings["allow_large"] = false;`
 10. To make all images larger add `image_tile_settings["all_large"] = true;`
+11. To override the default of 4 small tiles per row, use `image_tile_settings["small_per_row"]= 5;`
 
 ```XML
   <div id="image-tile"></div>
